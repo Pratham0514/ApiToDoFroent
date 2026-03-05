@@ -3,19 +3,23 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 function Home() {
   const [todos, setTodos] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   {/*Load Todos from Backend 
       axio is a library for making HTTP requests in the browser.    
     */} 
 
+    
   const loadTodos = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`);
 
       setTodos(response.data.data);
 
     } catch (error) {
       console.error("Error fetching todos:", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -51,7 +55,16 @@ const markdone = async (id, isDone) => {
 };
  return (
   <div className="min-h-screen bg-slate-100 p-4 md:p-10">
-
+{/* Loading Popup */}
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+          <div className="bg-white px-6 py-4 rounded-xl shadow-xl text-center">
+            <p className="text-lg font-semibold">
+              ⏳ Server responding... please wait
+            </p>
+          </div>
+        </div>
+      )}
     {/* Header */}
     <div className="mb-8 text-center">
       <h1 className="text-3xl md:text-5xl font-bold text-slate-800">
