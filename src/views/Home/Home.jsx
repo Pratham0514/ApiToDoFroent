@@ -61,6 +61,7 @@ const markdone = async (id, isDone) => {
           <div className="bg-white px-6 py-4 rounded-xl shadow-xl text-center">
             <p className="text-lg font-semibold">
               ⏳ Server responding... please wait
+              I am using free server so it may take some time
             </p>
           </div>
         </div>
