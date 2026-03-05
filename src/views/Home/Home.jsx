@@ -18,11 +18,21 @@ function Home() {
       console.error("Error fetching todos:", error);
     }
   };
-
   useEffect(() => {
     loadTodos();
   }, []);
 
+  const deleteTodo = async (id) => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/todos/${id}`);
+      if(response){
+        alert(response.data.message);
+        loadTodos();
+      }
+    }catch (error) {
+      console.error("Error deleting todo:", error);
+    }
+  };
  return (
   <div className="min-h-screen bg-slate-100 p-4 md:p-10">
 
@@ -80,8 +90,17 @@ function Home() {
               </span>
             </div>
           </div>
+          <button onClick={() => deleteTodo(todo.id)}
+          className="bg-red-600 text-white px-2 py-1 rounded-xl shadow-md hover:bg-red-700 transition flex items-center gap-2 font-semibold ml-auto mr-2 h-8 "> 🗑 Delete</button>
         </div>
       ))}
+
+      
+
+
+
+
+
 
       {/* Floating Add Todo Button */}
       <Link
