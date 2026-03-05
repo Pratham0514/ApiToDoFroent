@@ -10,7 +10,7 @@ function Home() {
 
   const loadTodos = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/todos");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`);
 
       setTodos(response.data.data);
 

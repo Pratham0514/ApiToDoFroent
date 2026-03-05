@@ -5,7 +5,7 @@ import axios from "axios";
 function NewTodo() {
 
   const [todoData, setTodoData] = useState({
-    todoItem: "",
+    todoItems: "",
     priority: "High",
     emoji: "🌄",
   });
@@ -13,8 +13,7 @@ function NewTodo() {
   const [emojiPicker, setEmojiPicker] = useState(false);
  const Addtodo = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:8080/todos",
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/todos`,
       todoData
     );
 
@@ -42,13 +41,14 @@ function NewTodo() {
         {/* Todo Input */}
         <input
           type="text"
-          value={todoData.todoItem}
+          value={todoData.todoItems}
           onChange={(e) =>
             setTodoData({ ...todoData, todoItem: e.target.value })
           }
           placeholder="Enter todo task..."
           className="w-full border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
+        
 
         {/* Priority Select */}
         <select
