@@ -109,9 +109,13 @@ const markdone = async (id, isDone) => {
               </span>
             </div>
           </div>
+          <div className="flex items-center gap-2 pr-4">
           <button onClick={() => deleteTodo(todo.id)}
           className="bg-red-600 text-white px-2 py-1 rounded-xl shadow-md hover:bg-red-700 transition flex items-center gap-2 font-semibold ml-auto mr-2 h-8 "> 🗑 Delete</button>
+          <Link to={`/edit/${todo.id}`} className="bg-indigo-600 text-white px-2 py-1 rounded-xl shadow-md hover:bg-indigo-700 transition flex items-center gap-2 font-semibold h-8 "> 📝 Edit</Link>
+          </div>
         </div>
+          
       ))}
 
       
