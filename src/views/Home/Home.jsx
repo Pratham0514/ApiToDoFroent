@@ -33,6 +33,22 @@ function Home() {
       console.error("Error deleting todo:", error);
     }
   };
+
+const markdone = async (id, isDone) => {
+  try {
+    const response = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/todos/${id}/status`,
+      { isDone:isDone }
+    );
+
+    if (response) {
+      alert(response.data.message);
+      loadTodos();
+    }
+  } catch (error) {
+    console.error("Error updating todo:", error);
+  }
+};
  return (
   <div className="min-h-screen bg-slate-100 p-4 md:p-10">
 
@@ -62,11 +78,14 @@ function Home() {
               ? "bg-orange-400"
               : "bg-green-500"
           }`} />
-
-          <div className="flex items-center justify-center px-5 text-3xl">
+          <div className="flex items-center gap-3 pl-4">
+          <input type="checkbox" checked={todo.isDone}
+              onChange={(e)=>{markdone(todo.id,e.target.checked);}}
+              className="w-5 h-5 cursor-pointer"/>
+            <div className="flex items-center justify-center px-5 text-3xl">
             {todo.emoji}
           </div>
-
+          </div>
           <div className="py-4 pr-6 flex-1 min-w-0">
             <p className={`text-lg font-semibold break-words ${
               todo.isDone ? "line-through text-gray-400" : "text-slate-800"
