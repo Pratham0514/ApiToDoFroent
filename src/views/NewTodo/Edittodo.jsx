@@ -56,6 +56,8 @@ function Edittodo() {
         // alert(response.data.message);
       Swal.fire({
   title: response.data.message,
+  showConfirmButton: false,   // OK button hide
+  timer: 1000,
   showClass: {
     popup: `animate__animated animate__rotateOutDownLeft`
   },
