@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import EmojiPicker from "emoji-picker-react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import Swal from 'sweetalert2';
+import 'animate.css';
 function Edittodo() {
 
   const { id } = useParams();
@@ -52,7 +53,19 @@ function Edittodo() {
       );
 
       if (response) {
-        alert(response.data.message);
+        // alert(response.data.message);
+      Swal.fire({
+  title: response.data.message,
+  showClass: {
+    popup: `animate__animated animate__rotateOutDownLeft`
+  },
+  hideClass: {
+    popup: `animate__animated animate__rotateOutDownLeft`
+  },
+  didOpen: (popup) => {
+    popup.style.setProperty('--animate-duration', '5s');
+  }
+});
 
         setTimeout(() => {
           window.location.href = "/";
